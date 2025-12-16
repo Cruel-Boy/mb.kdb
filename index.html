@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b0f14;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #error {
+            display: none;
+            color: #ffffff;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20%;
+        }
+    </style>
+</head>
+<body>
+
+<iframe id="viewer"></iframe>
+<div id="error">Invalid or missing document</div>
+
+<script>
+    (function () {
+        const params = new URLSearchParams(window.location.search);
+
+        // Read custom query parameter: qr-offr
+        const code = params.get("qr-offr");
+
+        // EXACTLY 13 characters: letters + numbers
+        if (!code || !/^[A-Za-z0-9]{13}$/.test(code)) {
+            document.getElementById("error").style.display = "block";
+            return;
+        }
+
+        // Load PDF from local folder
+        document.getElementById("viewer").src = `files/${code}.pdf`;
+    })();
+</script>
+
+</body>
+</html>

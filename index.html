@@ -32,7 +32,7 @@
         const isValid = /^[A-Za-z0-9]{13}$/.test(fileId);
 
         if (isValid) {
-            document.getElementById("pdfViewer").src = `/files/${fileId}.pdf`;
+            document.getElementById("pdfViewer").src = `/files/${fileId}`;
         } else {
             document.body.innerHTML = `
                 <h2 style="text-align:center;margin-top:20%">
@@ -43,4 +43,5 @@
 </script>
 
 </body>
+
 </html>

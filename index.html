@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <title>PDF Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <iframe id="pdfViewer" width="100%" height="100%"></iframe>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const doc = params.get('doc');
+
+  const pdfUrl = `/docs/qr-offr/${doc}.pdf`;
+
+  fetch(pdfUrl, { method: 'HEAD' })
+    .then(res => {
+      if (!res.ok) {
+        window.location.href = '/404.html';
+        return;
+      }
+      document.getElementById('pdfViewer').src = pdfUrl;
+    })
+    .catch(() => {
+      window.location.href = '/404.html';
+    });
+</script>
 
     <style>
         html, body {
